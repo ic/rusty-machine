@@ -6,7 +6,7 @@ This document will (loosely) keep track of my development goals for this project
 
 ## Current Progress
 
-The linear algebra library is now fairly filled out. But there is still lots of room for optimization (it is almost definitely better to switch to BLAS/LAPACK).
+The linear algebra library previously in rusty-machine is now a new crate - [Rulinalg](https://github.com/AtheMathmo/rulinalg).
 
 For full information on what is currently available look at the [crate documentation](https://athemathmo.github.io/rusty-machine/rusty-machine/doc/rusty_machine/index.html).
 
@@ -21,10 +21,13 @@ This marks my intended release goals. I won't estimate the actual dates of relea
         <th>Version</th><th>Features</th><th>Dependencies</th>
     </tr>
     <tr>
-        <td>0.3.X</td><td>Linalg Separation</td><td><ul><li>None</li></ul></td>
+        <td>0.4.X</td><td>Model improvements</td><td><ul><li>None</li></ul></td>
     </tr>
     <tr>
-        <td>0.3.X</td><td>Better error handling</td><td><ul><li>None</li></ul></td>
+        <td>0.4.X</td><td>Nearest Neighbours</td><td><ul><li>None</li></ul></td>
+    </tr>
+    <tr>
+        <td>0.4.X</td><td>DBSCAN</td><td><ul><li>None</li></ul></td>
     </tr>
 </table>
 
@@ -32,7 +35,5 @@ Whilst working on the above there will of course be ongoing development on the e
 
 ### Unplanned:
 
-- Multi-threaded divide and conquer matrix multiplication (currently iterative).
-- Data Handling.
 - Convolutional and Recurrent neural nets.
 - SVM coordinate descent as per [this paper](http://www.loshchilov.com/publications/GECCO2011_AdaptiveCoordinateDescent.pdf).

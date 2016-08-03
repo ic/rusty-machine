@@ -2,6 +2,100 @@
 
 This document will be used to keep track of changes made between release versions. I'll do my best to note any breaking changes!
 
+## 0.4.3
+
+### New Contributors
+
+- [tafia](https://github.com/tafia) who is responsible for all changes in this release.
+
+### Breaking Changes
+
+- None
+
+### Features
+
+- None
+
+### Minor Changes
+
+- Made neural nets more efficient by reducing clones
+and some restructuring.
+- Removing unneeded copying in favour of slicing for performance.
+- Using `iter_rows` in favour of manually row iterating by chunks.
+
+## 0.4.2
+
+### Breaking Changes
+
+- None
+
+### Features
+
+- None
+
+### Minor Changes
+
+- Fixed a significant bug in the K-Means algorithm. Centroids
+were not updating correctly during M-step.
+
+## 0.4.1
+
+### Breaking Changes
+
+- None
+
+### Features
+
+- Added experimental implementation of DBSCAN clustering.
+
+### Minor Changes
+
+- Added new example for K-Means clustering in repo.
+
+## 0.4.0
+
+This is the biggest release so far. Primarily because the `linalg`
+module has been pulled out into its own crate: [rulinalg](https://github.com/AtheMathmo/rulinalg).
+
+In addition to this there have been a number of improvements to the `linalg`
+and `learning` moduled in this release.
+
+### Breaking Changes
+
+- The `linalg` module pulled out and replaced by reexports of [rulinalg](https://github.com/AtheMathmo/rulinalg).
+All structs are now imported at the `linalg` level, i.e. `linalg::matrix::Matrix` -> `linalg::Matrix`.
+- Decomposition methods now return `Result` instead of panicking on fail.
+- K-Means now has a trait for `Initializer` - which allows generic initialization algorithms.
+
+### Features
+
+- New error handling in both the `linalg` (now rulinalg) and `learning` modules.
+- Bug fixed in eigendecomposition: it can now be used!
+- K-means can now take a generic initialization algorithm.
+
+### Minor Changes
+
+- Optimization and code cleanup in the decomposition methods.
+- Some optimization in the K-Means model.
+
+## 0.3.3
+
+### New Contributors
+
+- [ic](https://github.com/ic) (Added examples to repo!)
+
+### Breaking Changes
+
+- Parameter methods now return `Option<&Type>` instead of `&Option<Type>`.
+
+### Features
+
+- `MatrixSlice` and `MatrixSliceMut` now have `IntoIterator` methods.
+
+### Minor Changes
+
+- Adding examples to the repository.
+
 ## 0.3.2
 
 ### New Contributors
@@ -16,7 +110,7 @@ This document will be used to keep track of changes made between release version
 
 - Assignment operators (`+=`, `-=`, etc.) now implemented for `Vector`.
 
-### Minor Features
+### Minor Changes
 
 - Some optimizations to `variance` computation for `Matrix`.
 - Some code cleanup - thanks to [clippy](https://github.com/Manishearth/rust-clippy). 
