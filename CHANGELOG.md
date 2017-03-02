@@ -2,6 +2,128 @@
 
 This document will be used to keep track of changes made between release versions. I'll do my best to note any breaking changes!
 
+## 0.5.4
+
+### New Contributors
+
+- [sinhrks](https://github.com/sinhrks)
+
+### Breaking Changes
+
+- None
+
+### Features
+
+- Add a new `datasets` module behind a `datasets` feature flag.
+- Add new classification scores: `precision`, `recall`, and `f1`.
+- Add a new `Transformer::fit` function to allow prefitting of a
+`Transformer` before use.
+
+### Bug Fixes
+
+- None
+
+### Minor Changes
+
+- `LinRegressor` now uses `solve` instead of `inverse` for improved
+accuracy and stability.
+
+## 0.5.3
+
+### Breaking Changes
+
+- None
+
+### Features
+
+- Adding a new `confusion_matrix` module.
+
+### Bug Fixes
+
+- None
+
+### Minor Changes
+
+- Updated rulinalg dependency to `0.3.7`.
+
+## 0.5.2
+
+### New Contributors
+
+- [scholtzan](https://github.com/scholtzan)
+
+### Breaking Changes
+
+- None
+
+### Features
+
+- None
+
+### Bug Fixes
+
+- Regularization constant for GMM is now only added to diagonal.
+
+### Minor Changes
+
+- Added some better `Result` handling to GMM.
+
+## 0.5.1
+
+This version includes no changes but is a bump due to a
+[crates bug](https://github.com/rust-lang/crates.io/issues/448#issuecomment-251037439).
+
+See the notes for 0.5.0 below.
+
+## 0.5.0
+
+This is another fairly large release. Thank you to everyone who contributed!
+
+### New Contributors
+
+- [NivenT](https://github.com/NivenT)
+- [theotherphil](https://github.com/theotherphil)
+- [andrewcsmith](https://github.com/andrewcsmith)
+
+### Breaking Changes
+
+- The `SupModel` and `UnSupModel` traits now return
+`Result`s for the `train` and `predict` functions.
+- Updated to [rulinalg](https://github.com/AtheMathmo/rulinalg) v0.3 ([see
+rulinalg changelog for
+details](https://github.com/AtheMathmo/rulinalg/blob/master/CHANGELOG.md#030)).
+
+### Features
+
+- Adding RMSProp gradient descent algorithm. #121
+- Adding cross validation. #125
+- Adding a new `Shuffler` transformer. #135
+
+### Bug Fixes
+
+- None
+
+### Minor Changes
+
+- Adding benchmarks
+- Initiate GMM with sample covariance of data (instead of identity matrix).
+
+## 0.4.4
+
+### Breaking Changes
+
+- None
+
+### Features
+
+- Adding new `Transformer` trait for data preprocessing.
+- Adding a `MinMax` transformer.
+- Adding a `Standardizer` transformer.
+
+### Minor Changes
+
+- None
+
 ## 0.4.3
 
 ### New Contributors

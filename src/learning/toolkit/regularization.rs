@@ -14,9 +14,8 @@
 //! let reg = Regularization::L1(0.5);
 //! ```
 
-use linalg::Metric;
-use linalg::{Matrix, MatrixSlice};
-use linalg::BaseSlice;
+use linalg::norm::{Euclidean, Lp, MatrixNorm};
+use linalg::{Matrix, MatrixSlice, BaseMatrix};
 use libnum::{FromPrimitive, Float};
 
 /// Model Regularization
@@ -58,9 +57,7 @@ impl<T: Float + FromPrimitive> Regularization<T> {
     }
 
     fn l1_reg_cost(mat: &MatrixSlice<T>, x: T) -> T {
-        // TODO: This won't be regularized. Need to unroll...
-        let l1_norm = mat.iter()
-            .fold(T::zero(), |acc, y| acc + y.abs());
+        let l1_norm = Lp::Integer(1).norm(mat);
         l1_norm * x / ((T::one() + T::one()) * FromPrimitive::from_usize(mat.rows()).unwrap())
     }
 
@@ -79,7 +76,7 @@ impl<T: Float + FromPrimitive> Regularization<T> {
     }
 
     fn l2_reg_cost(mat: &MatrixSlice<T>, x: T) -> T {
-        mat.norm() * x / ((T::one() + T::one()) * FromPrimitive::from_usize(mat.rows()).unwrap())
+        Euclidean.norm(mat) * x / ((T::one() + T::one()) * FromPrimitive::from_usize(mat.rows()).unwrap())
     }
 
     fn l2_reg_grad(mat: &MatrixSlice<T>, x: T) -> Matrix<T> {
@@ -90,8 +87,8 @@ impl<T: Float + FromPrimitive> Regularization<T> {
 #[cfg(test)]
 mod tests {
     use super::Regularization;
-    use linalg::Matrix;
-    use linalg::Metric;
+    use linalg::{Matrix, BaseMatrix};
+    use linalg::norm::{Euclidean, MatrixNorm};
 
     #[test]
     fn test_no_reg() {
@@ -139,7 +136,7 @@ mod tests {
         let a = no_reg.reg_cost(mat_slice);
         let b = no_reg.reg_grad(mat_slice);
 
-        assert!((a - (input_mat.norm() / 12f64)) < 1e-18);
+        assert!((a - (Euclidean.norm(&input_mat) / 12f64)) < 1e-18);
 
         let true_grad = &input_mat / 6f64;
         for eps in (b - true_grad).into_vec() {
@@ -157,7 +154,7 @@ mod tests {
         let a = no_reg.reg_cost(mat_slice);
         let b = no_reg.reg_grad(mat_slice);
 
-        assert!(a - ((input_mat.norm() / 24f64) + (42f64 / 12f64)) < 1e-18);
+        assert!(a - ((Euclidean.norm(&input_mat) / 24f64) + (42f64 / 12f64)) < 1e-18);
 
         let l1_true_grad = Matrix::new(3, 4,
             vec![-1., -1., -1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]
